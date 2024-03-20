@@ -3,7 +3,11 @@ from database_manager import DatabaseManager
 from request_manager import Request
 from local_settings import DATABASE
 from constants import URL
+import logging
 
+
+# Logging basic configuration
+logging.basicConfig(filename="logging's.log")
 
 # Connect to database
 database_manager = DatabaseManager(
@@ -104,8 +108,13 @@ if __name__ == '__main__':
 
     except ValueError as error:
         print('ValueError:', error)
+        logging.error(error)
     except AttributeError as error:
         print('AttributeError:', error)
+        logging.error(error)
+    except TimeoutError as error:
+        print('TimeoutError:', error)
+        logging.error(error)
     finally:
         if database_manager.db:
             database_manager.db.close()
