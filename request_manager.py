@@ -62,11 +62,11 @@ class Request:
         """
         return self.response.headers
 
-    def get_tag(self, html_tag: str, tag_id_by: str = None, tag_id: str = None):
+    def get_one(self, html_tag: str, tag_id_by: str = None, tag_id: str = None):
         """
         This function gets html_tag such as div
         and tag_id_by such as class or id
-        and finally tag_id which is diffrent on every website.
+        and finally tag_id which is different on every website.
         If you do not set tag_id_by or tag_id it will just use html_tag to find data
         """
         try:
@@ -74,8 +74,7 @@ class Request:
                 data = self.content.find(html_tag)
             else:
                 data = self.content.find(
-                    html_tag, {tag_id_by: tag_id}
-            )
+                    html_tag, {tag_id_by: tag_id})
         except ValueError as error:
             print('ValueError:', error)
             logging.error('ValueError')
@@ -87,7 +86,7 @@ class Request:
         """
         This function gets html_tag such as div
         and tag_id_by such as class or id
-        and finally tag_id which is diffrent on every website.
+        and finally tag_id which is different on every website.
         Return a list of all tags that you want.
         If you do not set tag_id_by or tag_id it will just use html_tag to find data.
         """
