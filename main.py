@@ -94,7 +94,7 @@ def scrape_data():
 def create_csv():
     """Create a csv file of datas"""
     data = {
-        'Name': names,
+        'name': names,
         'population': populations,
         'area': areas,
         'ideological_allies': ideological_allies,
