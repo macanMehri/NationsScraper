@@ -4,6 +4,7 @@ from request_manager import Request
 from local_settings import DATABASE
 from constants import URL
 import logging
+import pandas as pd
 
 
 # Logging basic configuration
@@ -90,6 +91,19 @@ def scrape_data():
         ideological_allies.append(ideological_allies_text)
 
 
+def create_csv():
+    """Create a csv file of datas"""
+    data = {
+        'Name': names,
+        'population': populations,
+        'area': areas,
+        'ideological_allies': ideological_allies,
+        'info': infos,
+    }
+    data_frame = pd.DataFrame(data=data)
+    data_frame.to_csv('USA_nations')
+
+
 if __name__ == '__main__':
     try:
         # Create table of Nation model
@@ -105,6 +119,14 @@ if __name__ == '__main__':
                 ideological_allies=ideological_allies[nation],
                 info=infos[nation],
             )
+        while True:
+            order = input('Do you want to save information in a csv file?(Y/N): ')
+            if order == 'Y' or order == 'N':
+                break
+            print('Sorry! I do not understand your request. Please try again.')
+
+        if order == 'Y':
+            create_csv()
 
     except ValueError as error:
         print('ValueError:', error)
